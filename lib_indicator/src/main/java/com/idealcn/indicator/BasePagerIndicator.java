@@ -51,7 +51,7 @@ public class BasePagerIndicator extends LinearLayout{
         super.onSizeChanged(w, h, oldw, oldh);
          mTriangleWidth = (int) (w/3 * RADIO_TRIANGLE_WIDTH);
         mInitTranslationX = w/3/2 - mTriangleWidth /2 ;
-        
+
         initTriangle();
     }
 
