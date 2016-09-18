@@ -11,7 +11,7 @@ import com.idealcn.indicator.BasePagerIndicator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements BasePagerIndicator.OnPageChangeListener {
 
 
     private ViewPager mMainPager;
@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity  {
 
         indicator.setViewPager(mMainPager,0);
 
+        indicator.addOnPageChangeListener(this);
+
     }
 
     private void initData() {
@@ -74,4 +76,18 @@ public class MainActivity extends AppCompatActivity  {
         mMainPager.setAdapter(adapter);
     }
 
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
 }

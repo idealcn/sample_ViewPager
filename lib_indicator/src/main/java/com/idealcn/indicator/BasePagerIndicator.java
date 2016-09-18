@@ -25,14 +25,14 @@ import java.util.List;
 public class BasePagerIndicator extends LinearLayout {
 
     public BasePagerIndicator(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public BasePagerIndicator(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BasePagerIndicator);
         mTabVisibleCount = typedArray.getInt(R.styleable.BasePagerIndicator_tab_visible_count, DEFAULT_TAB_VISIBLE_COUNT);
-        if (mTabVisibleCount<0)
+        if (mTabVisibleCount < 0)
             mTabVisibleCount = DEFAULT_TAB_VISIBLE_COUNT;
         typedArray.recycle();
         init();
@@ -114,7 +114,7 @@ public class BasePagerIndicator extends LinearLayout {
     }
 
     private void scroll(int position, float positionOffset) {
-        Log.d(TAG, "scroll: "+positionOffset);
+        Log.d(TAG, "scroll: " + positionOffset);
         int tabWidth = getWidth() / mTabVisibleCount;
         mTranslationX = (int) (tabWidth * positionOffset + tabWidth * position);
 
@@ -171,16 +171,20 @@ public class BasePagerIndicator extends LinearLayout {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 scroll(position, positionOffset);
+                if (listener != null)
+                    listener.onPageScrolled(position, positionOffset, positionOffsetPixels);
             }
 
             @Override
             public void onPageSelected(int position) {
-
+                if (listener != null)
+                    listener.onPageSelected(position);
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+                if (listener != null)
+                    listener.onPageScrollStateChanged(state);
             }
         });
     }
@@ -207,5 +211,21 @@ public class BasePagerIndicator extends LinearLayout {
             });
 
         }
+    }
+
+    public interface OnPageChangeListener {
+        void onPageScrolled(int position, float positionOffset, int positionOffsetPixels);
+
+
+        void onPageSelected(int position);
+
+
+        void onPageScrollStateChanged(int state);
+    }
+
+    private OnPageChangeListener listener;
+
+    public void addOnPageChangeListener(OnPageChangeListener listener) {
+        this.listener = listener;
     }
 }
