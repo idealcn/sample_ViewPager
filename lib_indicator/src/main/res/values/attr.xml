@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr
+        name="tab_visible_count" format="integer"/>
+    <declare-styleable name="BasePagerIndicator">
+        <attr name="tab_visible_count"/>
+    </declare-styleable>
+</resources>
